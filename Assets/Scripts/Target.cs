@@ -15,16 +15,19 @@ public class Target : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Rotate Target
         transform.Rotate(Vector3.right, speed * Time.deltaTime);
     }
     private void OnCollisionEnter(Collision collision)
     {
+        //Target collide with knife
         if (collision.gameObject.CompareTag("Knife"))
         {
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             collision.gameObject.transform.parent = gameObject.transform;
         }
     }
+    //Adding Health
     public void AddHealth(int Health)
     {
         health += Health;

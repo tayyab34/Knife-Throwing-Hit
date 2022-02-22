@@ -7,7 +7,6 @@ public class KnifeMovement : MonoBehaviour
     private float force = 500f;
     private Rigidbody KnifeRb;
     private Target target;
-    public bool spacepressed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,21 +17,23 @@ public class KnifeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Knife Movement
         if (Input.GetKeyDown(KeyCode.Space))
         {
             KnifeRb.AddForce(Vector3.forward * force, ForceMode.Impulse);
-            spacepressed = true;
         }
     }
+    //Knife collide with target
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Target"))
         {
             target.AddHealth(-10);
+        
+            //Knife collide with knife
+        if (collision.gameObject.CompareTag("Knife"))
+        {
+            Debug.Log("GameOver");
         }
-        //if (collision.gameObject.CompareTag("Knife"))
-        //{
-        //    KnifeRb.AddForce(Vector3.forward * -force, ForceMode.Impulse);
-        //}
     }
 }
